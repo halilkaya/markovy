@@ -1,4 +1,7 @@
 # markovy
+[![PyPI version](https://badge.fury.io/py/markovy.svg)](https://badge.fury.io/py/markovy)
+[![GPL Licence][licence-badge]](LICENSE)
+
 Python module for Markov Chain algorithm
 
 ## Installation
@@ -30,10 +33,10 @@ make(what='sentence', count=1, min=5, max=10)
 ```
 
  - **what** *(String)*
-   - word: Generates irrelevant word from the dataset.
-   - sentence *(default)*: Generates random sentences from the dataset.
-   - paragraph: Generates random paragraphs from the dataset.
-   - text: Generates random texts from the dataset.
+   - **word:** Generates irrelevant word from the dataset.
+   - **sentence** *(default)*: Generates random sentences from the dataset.
+   - **paragraph:** Generates random paragraphs from the dataset.
+   - **text:** Generates random texts from the dataset.
  - **count** *(Integer)*: How many *what* will you generate?
  - **min** *(Integer)*: Minimum sentence count.
  - **max** *(Integer)*: Maximum sentence count.
@@ -62,3 +65,5 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ```
 [See Full License](https://github.com/halilkaya/markovy/blob/master/LICENSE)
+
+[licence-badge]:http://img.shields.io/badge/licence-GPL-brightgreen.svg
