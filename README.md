@@ -46,6 +46,9 @@ make(what='sentence', count=1, min=5, max=10)
 ## Contributing
  - Random walking method is used on the current version. You can add weights for each words in chain to generate more logical outputs.
 
+## Thanks
+ - The idea came up while discussing with [Fatih Erikli](https://github.com/fatiherikli) and he suggested me to write a Python module for Markov Chain algorithm.
+
 ## License
 ```
 Python module for Markov Chain algorithm.
