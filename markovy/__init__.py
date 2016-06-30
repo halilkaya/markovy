@@ -49,7 +49,7 @@ class MarkovChain(object):
                 continue
 
 
-    def _make_word(self, count=COUNT):
+    def _make_word(self, count):
         """
         Generates irrelevant word from the dataset.
         """
@@ -65,7 +65,7 @@ class MarkovChain(object):
         return text and len(text) > 0 and text[-1] in self.ENDING_PUNCTUTATIONS
 
 
-    def _make_sentence(self, count=COUNT):
+    def _make_sentence(self, count):
         """
         Generates random sentences from the dataset.
         """
@@ -73,7 +73,7 @@ class MarkovChain(object):
         output = []
 
         for _ in range(count):
-            word = self._make_word()[0]
+            word = self._make_word(1)[0]
             sentence = ''.join([word[0].upper(), word[1:]])
 
             if self._is_end_of(sentence):
@@ -88,7 +88,7 @@ class MarkovChain(object):
         return output
 
 
-    def _make_paragraph(self, count=COUNT, min=MIN, max=MAX):
+    def _make_paragraph(self, count, min, max):
         """
         Generates random paragraphs from the dataset.
         """
@@ -99,14 +99,14 @@ class MarkovChain(object):
             paragraph = ''
 
             for __ in range(random.randint(min, max)):
-                paragraph += ''.join([self._make_sentence()[0], ' '])
+                paragraph += ''.join([self._make_sentence(1)[0], ' '])
 
             output.append(paragraph[0:len(paragraph)-1])
 
         return output
 
 
-    def _make_text(self, count=COUNT, min=MIN, max=MAX):
+    def _make_text(self, count, min, max):
         """
         Generates random texts from the dataset.
         """
@@ -117,7 +117,7 @@ class MarkovChain(object):
             text = ''
 
             for __ in range(random.randint(min, max)):
-                text += ''.join([self._make_paragraph(min=min, max=max)[0], \
+                text += ''.join([self._make_paragraph(1, min, max)[0], \
                                  '\n\n'])
 
             output.append(text[0:len(text)-2])
