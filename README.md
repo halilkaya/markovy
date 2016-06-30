@@ -1,5 +1,6 @@
 # markovy
 [![PyPI version](https://badge.fury.io/py/markovy.svg)](https://badge.fury.io/py/markovy)
+[![Build Status](https://travis-ci.org/halilkaya/markovy.svg?branch=master)](https://travis-ci.org/halilkaya/markovy)
 [![GPL Licence][licence-badge]](LICENSE)
 
 Parody generation with Markov Chain.
