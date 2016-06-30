@@ -18,8 +18,9 @@ class MarkovChain(object):
         """
 
         if isinstance(dataset, str):
-            f = open(dataset).read()
-            self.words = [w for w in f.replace('\n', ' ').split(' ')]
+            with open(dataset) as f:
+                f = f.read()
+                self.words = [w for w in f.replace('\n', ' ').split(' ')]
         elif isinstance(dataset, list):
             self.words = dataset
         else:
