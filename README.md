@@ -43,7 +43,7 @@ $ python tests.py
 
 ### `__init__()`
 ```python
-__init__(self, dataset)
+__init__(dataset)
 ```
 
  - **dataset:**
