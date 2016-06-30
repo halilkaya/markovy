@@ -42,7 +42,7 @@ $ python tests.py
 
 ### `make()`
 ```python
-make(what='sentence', count=1, min=5, max=10)
+make(what='sentence', count=1, minimum=5, maximum=10)
 ```
 
  - **what** *(String)*
@@ -51,8 +51,8 @@ make(what='sentence', count=1, min=5, max=10)
    - **paragraph:** Generates random paragraphs from the dataset.
    - **text:** Generates random texts from the dataset.
  - **count** *(Integer)*: How many *what* will you generate?
- - **min** *(Integer)*: Minimum sentence count.
- - **max** *(Integer)*: Maximum sentence count.
+ - **minimum** *(Integer)*: Minimum sentence count.
+ - **maximum** *(Integer)*: Maximum sentence count.
 
 **PS:** All results will be returned as list.
 
