@@ -2,7 +2,7 @@
 [![PyPI version](https://badge.fury.io/py/markovy.svg)](https://badge.fury.io/py/markovy)
 [![GPL Licence][licence-badge]](LICENSE)
 
-Python module for Markov Chain algorithm
+Parody generation with Markov Chain.
 
 ## Installation
 ```sh

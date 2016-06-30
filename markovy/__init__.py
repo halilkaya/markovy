@@ -4,7 +4,7 @@ import random
 
 class MarkovChain(object):
     """
-    Python module for Markov Chain algorithm.
+    Parody generation with Markov Chain.
     """
 
     # Default values:
