@@ -17,10 +17,11 @@ class MarkovChain(object):
         Defines dataset and calls method to parse it.
         """
 
-        if isinstance(dataset, str):
-            with open(dataset) as f:
-                f = f.read()
-                self.words = [w for w in f.replace('\n', ' ').split(' ')]
+        if hasattr(dataset, 'read'):
+            f = dataset.read()
+            self.words = [w for w in f.replace('\n', ' ').split(' ')]
+        elif isinstance(dataset, str):
+            self.words = [w for w in dataset.replace('\n', ' ').split(' ')]
         elif isinstance(dataset, list):
             self.words = dataset
         else:

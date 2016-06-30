@@ -7,7 +7,8 @@ class MarkovyTest(TestCase):
 
     def test_word(self):
         random.seed(0)
-        mc = MarkovChain('./test_dataset.txt')
+        with open('./test_dataset.txt') as f:
+            mc = MarkovChain(f)
         output35 = ['puzzles']
         output27 = ['With']
         output = [output35, output27]
@@ -15,7 +16,8 @@ class MarkovyTest(TestCase):
 
     def test_multiple_words(self):
         random.seed(0)
-        mc = MarkovChain('./test_dataset.txt')
+        with open('./test_dataset.txt') as f:
+            mc = MarkovChain(f)
         output35 = ['puzzles', 'know', 'and',
                     'man\'s', 'action.-', 'moment']
         output27 = ['With', 'of', 'scorns',
@@ -25,7 +27,8 @@ class MarkovyTest(TestCase):
 
     def test_sentence(self):
         random.seed(1)
-        mc = MarkovChain('./test_dataset.txt')
+        with open('./test_dataset.txt') as f:
+            mc = MarkovChain(f)
         output35 = ['Devoutly to say we know not of?']
         output27 = ['To grunt and by opposing end The undiscover\'d ' \
                     'country, from whose bourn No more; and sweat under ' \
@@ -36,7 +39,8 @@ class MarkovyTest(TestCase):
 
     def test_multiple_sentences(self):
         random.seed(5)
-        mc = MarkovChain('./test_dataset.txt')
+        with open('./test_dataset.txt') as f:
+            mc = MarkovChain(f)
         output35 = ['The native hue of action.- Soft you now!',
                     'Dream: ay, there\'s the name of office, and the rub!']
         output27 = ['Dread of thought, And enterprises of outrageous ' \
@@ -52,7 +56,8 @@ class MarkovyTest(TestCase):
 
     def test_one_word_sentence(self):
         random.seed(15)
-        mc = MarkovChain('./test_dataset.txt')
+        with open('./test_dataset.txt') as f:
+            mc = MarkovChain(f)
         output35 = ['Pause.']
         output27 = ['Word.']
         output = [output35, output27]
@@ -60,7 +65,8 @@ class MarkovyTest(TestCase):
 
     def test_paragraph(self):
         random.seed(5)
-        mc = MarkovChain('./test_dataset.txt')
+        with open('./test_dataset.txt') as f:
+            mc = MarkovChain(f)
         output35 = ['Dread of action.- Soft you now! Dream: ay, ' \
                     'there\'s the name of office, and the rub!']
         output27 = ['Thus conscience does make cowards of office, ' \
@@ -71,7 +77,8 @@ class MarkovyTest(TestCase):
 
     def test_text(self):
         random.seed(0)
-        mc = MarkovChain('./test_dataset.txt')
+        with open('./test_dataset.txt') as f:
+            mc = MarkovChain(f)
         output35 = ['And the spurns That makes us rather bear the spurns ' \
                     'That makes calamity of us rather bear those ills we ' \
                     'have Than fly to sleep. Quietus make cowards of ' \
@@ -83,7 +90,15 @@ class MarkovyTest(TestCase):
         output = [output35, output27]
         self.assertIn(mc.make('text', minimum=1, maximum=2), output)
 
-    def test_manual_dataset(self):
+    def test_manual_dataset_as_string(self):
+        random.seed(0)
+        mc = MarkovChain('For in that sleep of death what dreams may come')
+        output35 = ['what']
+        output27 = ['may']
+        output = [output35, output27]
+        self.assertIn(mc.make('word'), output)
+
+    def test_manual_dataset_as_list(self):
         random.seed(0)
         mc = MarkovChain(['For', 'in', 'that', 'sleep', 'of',
                           'death', 'what', 'dreams', 'may', 'come'])
@@ -97,17 +112,20 @@ class MarkovyTest(TestCase):
             mc = MarkovChain(True)
 
     def test_handling_int_type(self):
-        mc = MarkovChain('./test_dataset.txt')
+        with open('./test_dataset.txt') as f:
+            mc = MarkovChain(f)
         with self.assertRaises(TypeError):
             print(mc.make('sentence', count='1', minimum='2', maximum='3'))
 
     def test_handling_int_value(self):
-        mc = MarkovChain('./test_dataset.txt')
+        with open('./test_dataset.txt') as f:
+            mc = MarkovChain(f)
         with self.assertRaises(ValueError):
             print(mc.make('sentence', count=-1, minimum=-2, maximum=-3))
 
     def test_handling_make_type(self):
-        mc = MarkovChain('./test_dataset.txt')
+        with open('./test_dataset.txt') as f:
+            mc = MarkovChain(f)
         with self.assertRaises(TypeError):
             print(mc.make(5))
 

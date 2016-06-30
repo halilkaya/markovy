@@ -16,7 +16,8 @@ $ pip install markovy
 ```python
 from markovy import MarkovChain
 
-mc = MarkovChain('./shakespeare.txt')
+with open('./shakespeare.txt') as f:
+  mc = MarkovChain(f)
 
 print(mc.make('sentence'))
 # output: ["For in thy orisons Be all my sins rememb'red."]
@@ -39,6 +40,16 @@ $ python tests.py
 ```
 
 ## API Reference
+
+### `__init__()`
+```python
+__init__(self, dataset)
+```
+
+ - **dataset:**
+   - **file-like object:** Dataset can be file-like object as in usage example above.
+   - **string:** A string to be parsed can be given as dataset.
+   - **list:** A parsed word list can be given as dataset.
 
 ### `make()`
 ```python
