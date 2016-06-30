@@ -66,10 +66,7 @@ class MarkovChain(object):
         Checks if text ends with dot or not.
         """
 
-        if text and len(text) > 0 and text[-1] in self.ENDING_PUNCTUTATIONS:
-            return True
-
-        return False
+        return text and len(text) > 0 and text[-1] in self.ENDING_PUNCTUTATIONS
 
 
     def _make_sentence(self, count=COUNT):
