@@ -27,6 +27,16 @@ print(mc.make('sentence'))
  - pypy3
  - pypy
 
+## Running Tests
+To run tests, you have to install **unittest** first:
+```sh
+$ pip install unittest
+```
+Then, just run **tests.py**:
+```sh
+$ python tests.py
+```
+
 ## API Reference
 
 ### `make()`
