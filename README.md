@@ -43,6 +43,9 @@ make(what='sentence', count=1, min=5, max=10)
 
 **PS:** All results will be returned as list.
 
+## Contributors
+ - [Berker Peksağ](https://github.com/berkerpeksag)
+
 ## Contributing
  - Random walking method is used on the current version. You can add weights for each words in chain to generate more logical outputs.
 
