@@ -53,12 +53,7 @@ class MarkovChain(object):
         Generates irrelevant word from the dataset.
         """
 
-        output = []
-
-        for _ in range(count):
-            output.append(random.choice(self.words))
-
-        return output
+        return [random.choice(self.words) for _ in range(count)]
 
 
     def _is_end_of(self, text):
