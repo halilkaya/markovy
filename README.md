@@ -61,9 +61,9 @@ make(what='sentence', count=1, minimum=5, maximum=10)
    - **sentence** *(default)*: Generates random sentences from the dataset.
    - **paragraph:** Generates random paragraphs from the dataset.
    - **text:** Generates random texts from the dataset.
- - **count** *(Integer)*: How many *what* will you generate?
- - **minimum** *(Integer)*: Minimum sentence count.
- - **maximum** *(Integer)*: Maximum sentence count.
+ - **count** *(Integer)*: How many *what* will you generate? Default value is 1.
+ - **minimum** *(Integer)*: Minimum sentence count. Default value is 5.
+ - **maximum** *(Integer)*: Maximum sentence count. Default value is 10.
 
 **PS:** All results will be returned as list.
 
