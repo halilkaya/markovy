@@ -67,7 +67,7 @@ class MarkovyTest(TestCase):
                     'and the pale cast of so long life. Not to take ' \
                     'arms against a bare bodkin?']
         output = [output35, output27]
-        self.assertIn(mc.make('paragraph', min=1, max=2), output)
+        self.assertIn(mc.make('paragraph', minimum=1, maximum=2), output)
 
     def test_text(self):
         random.seed(0)
@@ -81,7 +81,7 @@ class MarkovyTest(TestCase):
                     'to sleep. The rub!\n\nAnd. Cast of time, Th\' ' \
                     'oppressor\'s wrong, the mind to be wish\'d.']
         output = [output35, output27]
-        self.assertIn(mc.make('text', min=1, max=2), output)
+        self.assertIn(mc.make('text', minimum=1, maximum=2), output)
 
     def test_manual_dataset(self):
         random.seed(0)
@@ -99,12 +99,12 @@ class MarkovyTest(TestCase):
     def test_handling_int_type(self):
         mc = MarkovChain('./test_dataset.txt')
         with self.assertRaises(TypeError):
-            print(mc.make('sentence', count='1', min='2', max='3'))
+            print(mc.make('sentence', count='1', minimum='2', maximum='3'))
 
     def test_handling_int_value(self):
         mc = MarkovChain('./test_dataset.txt')
         with self.assertRaises(ValueError):
-            print(mc.make('sentence', count=-1, min=-2, max=-3))
+            print(mc.make('sentence', count=-1, minimum=-2, maximum=-3))
 
     def test_handling_make_type(self):
         mc = MarkovChain('./test_dataset.txt')

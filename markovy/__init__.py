@@ -88,7 +88,7 @@ class MarkovChain(object):
         return output
 
 
-    def _make_paragraph(self, count, min, max):
+    def _make_paragraph(self, count, minimum, maximum):
         """
         Generates random paragraphs from the dataset.
         """
@@ -98,7 +98,7 @@ class MarkovChain(object):
         for _ in range(count):
             paragraph = ''
 
-            for __ in range(random.randint(min, max)):
+            for __ in range(random.randint(minimum, maximum)):
                 paragraph += ''.join([self._make_sentence(1)[0], ' '])
 
             output.append(paragraph[0:len(paragraph)-1])
@@ -106,7 +106,7 @@ class MarkovChain(object):
         return output
 
 
-    def _make_text(self, count, min, max):
+    def _make_text(self, count, minimum, maximum):
         """
         Generates random texts from the dataset.
         """
@@ -116,8 +116,8 @@ class MarkovChain(object):
         for _ in range(count):
             text = ''
 
-            for __ in range(random.randint(min, max)):
-                text += ''.join([self._make_paragraph(1, min, max)[0], \
+            for __ in range(random.randint(minimum, maximum)):
+                text += ''.join([self._make_paragraph(1, minimum, maximum)[0], \
                                  '\n\n'])
 
             output.append(text[0:len(text)-2])
@@ -137,12 +137,18 @@ class MarkovChain(object):
             raise ValueError('%s must be greater than zero.' % variable)
 
 
-    def make(self, what='sentence', count=COUNT, min=MIN, max=MAX):
+    def make(self, what='sentence', count=COUNT, minimum=MIN, maximum=MAX):
         """
         Generates random outputs based on the parsed data.
         """
 
-        for var in [{'count': count}, {'min': min}, {'max': max}]:
+        variables = [
+            {'count': count},
+            {'minimum': minimum},
+            {'maximum': maximum}
+        ]
+
+        for var in variables:
             key = list(var.keys())[0]
             self._handle_int_type(var[key], key)
 
@@ -157,7 +163,7 @@ class MarkovChain(object):
             return self._make_sentence(count)
 
         if what == 'paragraph':
-            return self._make_paragraph(count, min, max)
+            return self._make_paragraph(count, minimum, maximum)
 
         if what == 'text':
-            return self._make_text(count, min, max)
+            return self._make_text(count, minimum, maximum)
