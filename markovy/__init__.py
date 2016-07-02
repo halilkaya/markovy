@@ -1,4 +1,5 @@
 from collections import defaultdict
+from functools import wraps
 import random
 
 
@@ -50,14 +51,6 @@ class MarkovChain(object):
                 continue
 
 
-    def _make_word(self, count):
-        """
-        Generates irrelevant word from the dataset.
-        """
-
-        return [random.choice(self.words) for _ in range(count)]
-
-
     def _is_end_of(self, text):
         """
         Checks if text ends with dot or not.
@@ -66,7 +59,39 @@ class MarkovChain(object):
         return text and len(text) > 0 and text[-1] in self.ENDING_PUNCTUTATIONS
 
 
-    def _make_sentence(self, count):
+    def HandleIntTypes(func):
+        """
+        Decorator to handle int types for the parameters.
+        """
+
+        @wraps(func)
+        def decorated_function(*args, **kwargs):
+            for arg in kwargs.keys():
+                k = arg
+                v = kwargs[k]
+
+                if not isinstance(v, int):
+                    raise TypeError('%s must be integer.' % k)
+
+                if v < 0:
+                    raise ValueError('%s must be greater than zero.' % k)
+
+            return func(*args, **kwargs)
+
+        return decorated_function
+
+
+    @HandleIntTypes
+    def make_word(self, count=COUNT):
+        """
+        Generates irrelevant word from the dataset.
+        """
+
+        return [random.choice(self.words) for _ in range(count)]
+
+
+    @HandleIntTypes
+    def make_sentence(self, count=COUNT):
         """
         Generates random sentences from the dataset.
         """
@@ -74,7 +99,7 @@ class MarkovChain(object):
         output = []
 
         for _ in range(count):
-            word = self._make_word(1)[0]
+            word = self.make_word(1)[0]
             sentence = ''.join([word[0].upper(), word[1:]])
 
             if self._is_end_of(sentence):
@@ -89,7 +114,8 @@ class MarkovChain(object):
         return output
 
 
-    def _make_paragraph(self, count, minimum, maximum):
+    @HandleIntTypes
+    def make_paragraph(self, count=COUNT, minimum=MIN, maximum=MAX):
         """
         Generates random paragraphs from the dataset.
         """
@@ -100,14 +126,15 @@ class MarkovChain(object):
             paragraph = ''
 
             for __ in range(random.randint(minimum, maximum)):
-                paragraph += ''.join([self._make_sentence(1)[0], ' '])
+                paragraph += ''.join([self.make_sentence(1)[0], ' '])
 
             output.append(paragraph[0:len(paragraph)-1])
 
         return output
 
 
-    def _make_text(self, count, minimum, maximum):
+    @HandleIntTypes
+    def make_text(self, count=COUNT, minimum=MIN, maximum=MAX):
         """
         Generates random texts from the dataset.
         """
@@ -118,53 +145,9 @@ class MarkovChain(object):
             text = ''
 
             for __ in range(random.randint(minimum, maximum)):
-                text += ''.join([self._make_paragraph(1, minimum, maximum)[0], \
+                text += ''.join([self.make_paragraph(1, minimum, maximum)[0], \
                                  '\n\n'])
 
             output.append(text[0:len(text)-2])
 
         return output
-
-
-    def _handle_int_type(self, value, variable):
-        """
-        Handler for value is integer and greater than zero.
-        """
-
-        if not isinstance(value, int):
-            raise TypeError('%s must be integer.' % variable)
-
-        if value < 0:
-            raise ValueError('%s must be greater than zero.' % variable)
-
-
-    def make(self, what='sentence', count=COUNT, minimum=MIN, maximum=MAX):
-        """
-        Generates random outputs based on the parsed data.
-        """
-
-        variables = [
-            {'count': count},
-            {'minimum': minimum},
-            {'maximum': maximum}
-        ]
-
-        for var in variables:
-            key = list(var.keys())[0]
-            self._handle_int_type(var[key], key)
-
-        if not isinstance(what, str):
-            raise TypeError('what must be string: word, sentence ' +
-                            '(default), paragraph or text')
-
-        if what == 'word':
-            return self._make_word(count)
-
-        if what == 'sentence':
-            return self._make_sentence(count)
-
-        if what == 'paragraph':
-            return self._make_paragraph(count, minimum, maximum)
-
-        if what == 'text':
-            return self._make_text(count, minimum, maximum)
