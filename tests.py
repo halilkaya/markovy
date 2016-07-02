@@ -12,7 +12,7 @@ class MarkovyTest(TestCase):
         output35 = ['puzzles']
         output27 = ['With']
         output = [output35, output27]
-        self.assertIn(mc.make('word'), output)
+        self.assertIn(mc.make_word(), output)
 
     def test_multiple_words(self):
         random.seed(0)
@@ -23,7 +23,7 @@ class MarkovyTest(TestCase):
         output27 = ['With', 'of', 'scorns',
                     'To', 'patient', 'would']
         output = [output35, output27]
-        self.assertIn(mc.make('word', count=6), output)
+        self.assertIn(mc.make_word(count=6), output)
 
     def test_sentence(self):
         random.seed(1)
@@ -35,7 +35,7 @@ class MarkovyTest(TestCase):
                     'a weary life, But that we have shuffled off this ' \
                     'mortal coil, Must give us pause.']
         output = [output35, output27]
-        self.assertIn(mc.make(), output)
+        self.assertIn(mc.make_sentence(), output)
 
     def test_multiple_sentences(self):
         random.seed(5)
@@ -52,7 +52,7 @@ class MarkovyTest(TestCase):
                     'calamity of outrageous fortune Or to dream: ay, ' \
                     'there\'s the spurns That flesh is heir to.']
         output = [output35, output27]
-        self.assertIn(mc.make('sentence', count=2), output)
+        self.assertIn(mc.make_sentence(count=2), output)
 
     def test_one_word_sentence(self):
         random.seed(15)
@@ -61,7 +61,7 @@ class MarkovyTest(TestCase):
         output35 = ['Pause.']
         output27 = ['Word.']
         output = [output35, output27]
-        self.assertIn(mc.make(), output)
+        self.assertIn(mc.make_sentence(), output)
 
     def test_paragraph(self):
         random.seed(5)
@@ -73,7 +73,7 @@ class MarkovyTest(TestCase):
                     'and the pale cast of so long life. Not to take ' \
                     'arms against a bare bodkin?']
         output = [output35, output27]
-        self.assertIn(mc.make('paragraph', minimum=1, maximum=2), output)
+        self.assertIn(mc.make_paragraph(minimum=1, maximum=2), output)
 
     def test_text(self):
         random.seed(0)
@@ -88,7 +88,7 @@ class MarkovyTest(TestCase):
                     'to sleep. The rub!\n\nAnd. Cast of time, Th\' ' \
                     'oppressor\'s wrong, the mind to be wish\'d.']
         output = [output35, output27]
-        self.assertIn(mc.make('text', minimum=1, maximum=2), output)
+        self.assertIn(mc.make_text(minimum=1, maximum=2), output)
 
     def test_manual_dataset_as_string(self):
         random.seed(0)
@@ -96,7 +96,7 @@ class MarkovyTest(TestCase):
         output35 = ['what']
         output27 = ['may']
         output = [output35, output27]
-        self.assertIn(mc.make('word'), output)
+        self.assertIn(mc.make_word(), output)
 
     def test_manual_dataset_as_list(self):
         random.seed(0)
@@ -105,7 +105,7 @@ class MarkovyTest(TestCase):
         output35 = ['what']
         output27 = ['may']
         output = [output35, output27]
-        self.assertIn(mc.make('word'), output)
+        self.assertIn(mc.make_word(), output)
 
     def test_invalid_input(self):
         with self.assertRaises(TypeError):
@@ -115,19 +115,13 @@ class MarkovyTest(TestCase):
         with open('./test_dataset.txt') as f:
             mc = MarkovChain(f)
         with self.assertRaises(TypeError):
-            print(mc.make('sentence', count='1', minimum='2', maximum='3'))
+            print(mc.make_sentence(count='1', minimum='2', maximum='3'))
 
     def test_handling_int_value(self):
         with open('./test_dataset.txt') as f:
             mc = MarkovChain(f)
         with self.assertRaises(ValueError):
-            print(mc.make('sentence', count=-1, minimum=-2, maximum=-3))
-
-    def test_handling_make_type(self):
-        with open('./test_dataset.txt') as f:
-            mc = MarkovChain(f)
-        with self.assertRaises(TypeError):
-            print(mc.make(5))
+            print(mc.make_sentence(count=-1, minimum=-2, maximum=-3))
 
 
 if __name__ == '__main__':
