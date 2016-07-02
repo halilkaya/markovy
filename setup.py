@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='markovy',
-      version='0.1.2',
+      version='0.1.3',
       description='Parody generation with Markov Chain',
       url='https://github.com/halilkaya/markovy',
       author='Halil Kaya',
