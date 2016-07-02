@@ -19,7 +19,7 @@ from markovy import MarkovChain
 with open('./shakespeare.txt') as f:
   mc = MarkovChain(f)
 
-print(mc.make('sentence'))
+print(mc.make_sentence())
 # output: ["For in thy orisons Be all my sins rememb'red."]
 ```
 
@@ -51,16 +51,38 @@ __init__(dataset)
    - **string:** A string to be parsed can be given as dataset.
    - **list:** A parsed word list can be given as dataset.
 
-### `make()`
+### `make_word()`
 ```python
-make(what='sentence', count=1, minimum=5, maximum=10)
+make_word(count=1)
 ```
+Generates random word from the dataset.
 
- - **what** *(String)*
-   - **word:** Generates irrelevant word from the dataset.
-   - **sentence** *(default)*: Generates random sentences from the dataset.
-   - **paragraph:** Generates random paragraphs from the dataset.
-   - **text:** Generates random texts from the dataset.
+ - **count** *(Integer)*: How many *what* will you generate? Default value is 1.
+
+### `make_sentence()`
+```python
+make_sentence(count=1)
+```
+Generates random sentences from the dataset.
+
+ - **count** *(Integer)*: How many *what* will you generate? Default value is 1.
+
+### `make_paragraph()`
+```python
+make_paragraph(count=1, minimum=5, maximum=10)
+```
+Generates random paragraphs from the dataset.
+
+ - **count** *(Integer)*: How many *what* will you generate? Default value is 1.
+ - **minimum** *(Integer)*: Minimum sentence count. Default value is 5.
+ - **maximum** *(Integer)*: Maximum sentence count. Default value is 10.
+
+### `make_text()`
+```python
+make_text(count=1, minimum=5, maximum=10)
+```
+Generates random texts from the dataset.
+
  - **count** *(Integer)*: How many *what* will you generate? Default value is 1.
  - **minimum** *(Integer)*: Minimum sentence count. Default value is 5.
  - **maximum** *(Integer)*: Maximum sentence count. Default value is 10.
